@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "package": "org.keystream.app",
+  "version_code": 2102022,
+  "version_name": "21.2-test23",
+  "bytes": 433225110,
+  "sha256": "eb896dbcb0e41680d22bae9058afbbcb618e0f1f2963554caf6543f8d1b4b1d1",
+  "signer_sha256": "1cd042997a7b971841c190a93b8b8cfebf49f5c919449794043c76ff01e1974f",
+  "abis": [
+    "armeabi-v7a",
+    "arm64-v8a"
+  ],
+  "url": "https://github.com/kingsalami8-a11y/keystream/releases/download/21.2-test23/Key-Stream-21.2-test23-universal.apk"
+}
