@@ -1,0 +1,27 @@
+name: Assemble exact public phone preview 21
+on:
+  push:
+    branches: ['delivery/public-phone21-20261108']
+    paths: ['.github/workflows/assemble-phone21.yml', 'delivery/phone21/**']
+permissions:
+  contents: write
+concurrency:
+  group: public-phone21-assembly
+  cancel-in-progress: false
+jobs:
+  assemble:
+    if: github.repository == 'kingsalami8-a11y/keystream' && github.ref == 'refs/heads/delivery/public-phone21-20261108'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Read fixed assembly files at this exact commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh api "repos/${GITHUB_REPOSITORY}/contents/delivery/phone21/assemble.py?ref=${GITHUB_SHA}" --jq '.content' | base64 --decode > assemble.py
+          gh api "repos/${GITHUB_REPOSITORY}/contents/delivery/phone21/parts-manifest.json?ref=${GITHUB_SHA}" --jq '.content' | base64 --decode > parts-manifest.json
+      - name: Verify chunks, assemble exact APK and upload to existing public draft
+        shell: bash
+        run: python3 -B assemble.py
